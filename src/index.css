@@ -1,1 +1,79 @@
 @import "tailwindcss";
+
+.canvas {
+    width: 100%;
+    height: 100vh;
+}
+
+.character {
+    position: absolute;
+    /* Required for 'top' and 'left' to work */
+
+    /* property | duration | timing-function */
+    transition: all 3s linear;
+
+    /* Starting positions so JS has a baseline to calculate from */
+    top: 0px;
+    left: 0px;
+
+    pointer-events: none;
+}
+
+.character-internal {
+    width: 100px;
+    height: 100px;
+    background-image: url('./assets/Soldier.png');
+    background-size: 1800px 1400px;
+    --num-frames: 6;
+    --speed: 2;
+    animation: play calc(1s / var(--speed)) steps(var(--num-frames)) infinite;
+    /* transition: all 0.5s ease-in-out; */
+}
+
+@keyframes play {
+    from {
+        background-position-x: -50px;
+    }
+
+    to {
+        background-position-x: calc(var(--num-frames) * -200px - 50px);
+    }
+}
+
+.idle {
+    background-position-y: -50px;
+    --num-frames: 6;
+}
+
+.walk {
+    transform: scaleX(-1);
+    background-position-y: -250px;
+    --num-frames: 8;
+}
+
+.slash {
+    background-position-y: -450px;
+    --num-frames: 6;
+}
+
+.jump-smash {
+    background-position-y: -650px;
+    --num-frames: 6;
+}
+
+.shoot-arrow {
+    background-position-y: -850px;
+    --speed: 1;
+    --num-frames: 9;
+}
+
+.hurt {
+    background-position-y: -1050px;
+    --num-frames: 4;
+}
+
+.die {
+    background-position-y: -1250px;
+    --num-frames: 6;
+    --speed: 1;
+}
